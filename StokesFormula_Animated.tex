@@ -1,0 +1,142 @@
+% Forces for Stokes' formula (animated)
+% Author: Tobit Flatscher
+%
+% Description
+% Characteristic measures like drag and lift force can be calculated
+% by means of integration of surface stresses. Of particular interest
+% is the Stokes' regime (Re << 1) where time is symmetric in space 
+% and time as distribution of surface stresses and pressure around 
+% a simple sphere may be obtained analytically.
+% This vector graphic shows a simple animation of the surface stresses
+% along the body contour.
+
+%document settings
+\documentclass[english,10pt]{standalone}
+
+\usepackage{verbatim}
+\usepackage[ansinew]{inputenc}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{hyperref}
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage{ifthen}
+\usepackage{animate}
+
+% counter for angle position
+\newcounter{angle}
+\setcounter{angle}{0}
+
+% geometry parameters
+\def\rad{2.5} %circle radius
+\def\off{0.3} %label offset
+\def\deltaangle{5} %the size of the delta angle d0
+\def\nodrawangle{20} %maximum angle until which no angle label is plotted
+\def\arr{1} %arrow length
+
+% colours (rgb)
+\definecolor{lightgray}{rgb}{0.8, 0.8, 0.8}
+\definecolor{midgray}{rgb}{0.6, 0.6, 0.6}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{darkblue}{rgb}{0.5, 0.5, 0.75}
+\definecolor{darkgreen}{rgb}{0.5, 0.75, 0.5}
+
+\begin{document}
+
+\begin{animateinline}[loop, poster = first, controls]{30}
+
+% for all angles
+\whiledo{\theangle<180}{
+    
+    \begin{tikzpicture}
+    
+    % coordinate axes
+    \draw[dotted,darkgray] (-3,0)--(3,0) node[below] {};
+    \draw[dotted,darkgray] (0,-3)--(0,3) node[left] {};
+    \draw[black,thick] (0,0) circle (\rad);
+    
+    % radius label
+	\node[black,below right] at (0,-\rad) {$R$};
+	\draw[black,-stealth] (0,-1.2*\rad)--(0,-\rad);
+    
+    % pre-calculate often used parameters
+    \def\acos{cos(\theangle)}
+    \def\asin{sin(\theangle)}
+    \def\ahcos{cos(\theangle/2)}
+    \def\ahsin{sin(\theangle/2)}
+    \def\dacos{cos(\theangle+\deltaangle)}
+    \def\dasin{sin(\theangle+\deltaangle)}
+    
+    % area element: list of start and end points
+    \node[draw=none] at ({\rad*\acos},  {\rad*\asin})   (A)    {};
+    \node[draw=none] at ({\rad*\acos},  {-\rad*\asin})  (B)    {};
+    \node[draw=none] at ({\rad*\dacos}, {-\rad*\dasin}) (C)    {};
+    \node[draw=none] at ({\rad*\dacos}, {\rad*\dasin})  (D)    {};
+    % area element
+    \draw[midgray,fill=lightgray] (A.center)--(B.center)--(C.center)--(D.center);
+    \node[midgray,right] at ({\rad*\acos},-0.5) {$dA$};
+    
+    % stresses: list of start and end points
+    \node[draw=none] at ({(\rad+\arr)*\acos},     {(\rad+\arr)*\asin})      (E)    {}; %radial stress
+    \node[draw=none] at ({(\rad+\arr)*\acos},     {(\rad)*\asin})           (F)    {}; %radial stress (x-component)
+    \node[draw=none] at ({\rad*\acos-\arr*\asin}, {\rad*\asin+\arr*\acos})  (G)    {}; %tangential stress
+    \node[draw=none] at ({\rad*\acos-\arr*\asin}, {\rad*\asin})             (H)    {}; %tangential stress (x-component)
+    
+    % current angle
+    \draw[red] (0.5,0) arc (0:\theangle:0.5);
+    
+    % arrows for stresses
+    \draw[darkgreen,-stealth] (A.center)--(G.center);
+    \draw[darkblue, -stealth] (A.center)--(E.center);
+    
+    % determined if arrow should be plotted or not
+    \pgfmathparse{180-\nodrawangle}
+    \ifthenelse{\theangle<\nodrawangle \OR \theangle>\pgfmathresult}{
+    	\def\param{-}
+    	
+    }{
+    	\def\param{-stealth}
+	}
+
+	% plot tangential stress components
+	\draw[darkgreen,densely dotted,\param] (A.center)--(H.center);
+	\draw[darkgreen,densely dotted,\param] (H.center)--(G.center);
+
+	% plot radial stress components
+	\draw[darkblue,densely dotted,\param]  (A.center)--(F.center);
+	\draw[darkblue,densely dotted,\param]  (F.center)--(E.center);
+	
+	% add labels
+	\node[darkblue,draw=none] at ({(\off+\rad+\arr)*\acos}, {(\off+\rad+\arr)*\asin})        (I)    {$\sigma_{rr}$}; %label radial stress
+	\node[darkgreen,draw=none] at ({\rad*\acos-(\off+\arr)*\asin}, {\rad*\asin+(\off+\arr)*\acos})  (J)    {$\sigma_{r\Theta}$}; %label tangential stress
+	\node[red,draw=none] at ({(\off+\rad)*\dacos}, {(\off+\rad)*\dasin})  (K)    {$d\Theta$}; %angle theta
+	
+	% determine if label for angle theta should be plotted or not
+	\pgfmathparse{180-\nodrawangle}
+	\ifthenelse{\theangle>\nodrawangle}{
+		\def\param{-stealth}
+		\node[red,draw=none] at ({0.7*\ahcos}, {0.7*\ahsin})  (L)    {$\Theta$};
+	}{}
+    
+    % plot slice 0+d0
+    \draw[red] (0,0) -- (A.center);
+    \draw[red,densely dashed] (0,0) -- (D.center);
+    
+    % angle counter on left top
+    \node[red,right]   at (-3.5,3.5) {$\Theta = \theangle^{\mathrm{o}}$};
+    
+    % random nodes for field of few only
+    \node[black,right] at (-4.5,4) {};
+    \node[black,right] at (4.5,-3.1) {};
+    \end{tikzpicture}
+    
+    % advance angle
+    \stepcounter{angle}
+    \ifthenelse{\theangle<180}{
+            \newframe
+    }{
+            \end{animateinline}
+    }
+}
+
+\end{document}
