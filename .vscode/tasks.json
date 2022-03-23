@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "detail": "Build Latex files",
+      "type": "shell",
+      "command": "(cd ${workspaceFolder} && make all -j$(nproc))",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "clean",
+      "detail": "Run the clean target",
+      "type": "shell",
+      "command": "(cd ${workspaceFolder} && make clean)",
+    }
+  ]
+}

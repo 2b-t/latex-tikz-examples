@@ -1,0 +1,11 @@
+{
+  "name": "Latex Examples Docker Compose",
+  "dockerComposeFile": [
+    "../docker/docker-compose.yml"
+  ],
+  "service": "latex_docker",
+	"workspaceFolder": "/code/latex",
+  "shutdownAction": "stopCompose",
+  "extensions": [
+  ]
+}
