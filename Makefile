@@ -5,15 +5,15 @@
 SRCDIR = src
 BUILDDIR = build
 
-SOURCES = $(wildcard ../$(SRCDIR)/*.tex)
+SOURCES = $(wildcard $(SRCDIR)/*.tex)
 
 .PHONY: all clean
 
 all:
 	@mkdir -p $(BUILDDIR)
-	cd $(BUILDDIR) \
-	for i in $(SOURCES); do \
-		latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make $$i; \
+	@cd $(BUILDDIR)
+	@for i in $(SOURCES); do \
+		latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -output-directory="build" -use-make $$i; \
 	done
 
 %.tex: %.raw
@@ -23,4 +23,4 @@ all:
 	./dat2tex $< > $@
 
 clean:
-	latexmk -CA $(SOURCES)
+	latexmk -CA -output-directory="build" $(SOURCES)

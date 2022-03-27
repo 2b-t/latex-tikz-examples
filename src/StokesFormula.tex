@@ -56,8 +56,8 @@
     \draw[black,thick] (0,0) circle (\rad);
     
     % radius label
-	\node[black,below right] at (0,-\rad) {$R$};
-	\draw[black,-stealth] (0,-1.2*\rad)--(0,-\rad);
+    \node[black,below right] at (0,-\rad) {$R$};
+    \draw[black,-stealth] (0,-1.2*\rad)--(0,-\rad);
     
     % pre-calculate often used parameters
     \def\acos{cos(\theangle)}
@@ -92,31 +92,31 @@
     % determined if arrow should be plotted or not
     \pgfmathparse{180-\nodrawangle}
     \ifthenelse{\theangle<\nodrawangle \OR \theangle>\pgfmathresult}{
-    	\def\param{-}
-    	
+        \def\param{-}
+        
     }{
-    	\def\param{-stealth}
-	}
+        \def\param{-stealth}
+    }
 
-	% plot tangential stress components
-	\draw[darkgreen,densely dotted,\param] (A.center)--(H.center);
-	\draw[darkgreen,densely dotted,\param] (H.center)--(G.center);
+    % plot tangential stress components
+    \draw[darkgreen,densely dotted,\param] (A.center)--(H.center);
+    \draw[darkgreen,densely dotted,\param] (H.center)--(G.center);
 
-	% plot radial stress components
-	\draw[darkblue,densely dotted,\param]  (A.center)--(F.center);
-	\draw[darkblue,densely dotted,\param]  (F.center)--(E.center);
-	
-	% add labels
-	\node[darkblue,draw=none] at ({(\off+\rad+\arr)*\acos}, {(\off+\rad+\arr)*\asin})        (I)    {$\sigma_{rr}$}; %label radial stress
-	\node[darkgreen,draw=none] at ({\rad*\acos-(\off+\arr)*\asin}, {\rad*\asin+(\off+\arr)*\acos})  (J)    {$\sigma_{r\Theta}$}; %label tangential stress
-	\node[red,draw=none] at ({(\off+\rad)*\dacos}, {(\off+\rad)*\dasin})  (K)    {$d\Theta$}; %angle theta
-	
-	% determine if label for angle theta should be plotted or not
-	\pgfmathparse{180-\nodrawangle}
-	\ifthenelse{\theangle>\nodrawangle}{
-		\def\param{-stealth}
-		\node[red,draw=none] at ({0.7*\ahcos}, {0.7*\ahsin})  (L)    {$\Theta$};
-	}{}
+    % plot radial stress components
+    \draw[darkblue,densely dotted,\param]  (A.center)--(F.center);
+    \draw[darkblue,densely dotted,\param]  (F.center)--(E.center);
+    
+    % add labels
+    \node[darkblue,draw=none] at ({(\off+\rad+\arr)*\acos}, {(\off+\rad+\arr)*\asin})        (I)    {$\sigma_{rr}$}; %label radial stress
+    \node[darkgreen,draw=none] at ({\rad*\acos-(\off+\arr)*\asin}, {\rad*\asin+(\off+\arr)*\acos})  (J)    {$\sigma_{r\Theta}$}; %label tangential stress
+    \node[red,draw=none] at ({(\off+\rad)*\dacos}, {(\off+\rad)*\dasin})  (K)    {$d\Theta$}; %angle theta
+    
+    % determine if label for angle theta should be plotted or not
+    \pgfmathparse{180-\nodrawangle}
+    \ifthenelse{\theangle>\nodrawangle}{
+        \def\param{-stealth}
+        \node[red,draw=none] at ({0.7*\ahcos}, {0.7*\ahsin})  (L)    {$\Theta$};
+    }{}
     
     % plot slice 0+d0
     \draw[red] (0,0) -- (A.center);

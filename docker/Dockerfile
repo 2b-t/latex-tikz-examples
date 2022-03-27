@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM texlive/texlive:latest
 
 WORKDIR /code
 
@@ -9,6 +9,5 @@ RUN apt-get -y update && apt-get -y install \
     git-all
 
 RUN apt-get -y update && apt-get -y install \
-    texlive-latex-extra \
     latexmk
 

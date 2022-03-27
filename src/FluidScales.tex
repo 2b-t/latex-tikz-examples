@@ -43,8 +43,8 @@
 
 %random number generator
 \newcommand{\GenVar}[3]{
-	\pgfmathsetmacro{\RandomOne}{random(#1,#2)/#3} %generate two random numbers (x,y coordinates)
-	\pgfmathsetmacro{\RandomTwo}{random(#1,#2)/#3}
+    \pgfmathsetmacro{\RandomOne}{random(#1,#2)/#3} %generate two random numbers (x,y coordinates)
+    \pgfmathsetmacro{\RandomTwo}{random(#1,#2)/#3}
 }
 
 
@@ -53,14 +53,14 @@
 %create lattice pattern
 \tikzset{
 lattice/.pic = {
-	\fill (0,0) circle [radius=2pt]; %center circle
-	\foreach \x in {-1,0,1}{ %for all velocities in x direction
-		\foreach \y in {-1,0,1}{ %for al velocities in y direction
-			\xintifboolexpr {\x = 0 && \y = 0} %for a velocity with velocity 0 
-			{} %do nothing
-			{\GenVar{27}{40}{100} %else: generate a new random number
-				\draw [-stealth,line width=0.15mm] (\RandomOne*\x,\RandomOne*\y) to (0.08*\x,0.08*\y);}	%plot an arrow with random length
-		   }
+    \fill (0,0) circle [radius=2pt]; %center circle
+    \foreach \x in {-1,0,1}{ %for all velocities in x direction
+        \foreach \y in {-1,0,1}{ %for al velocities in y direction
+            \xintifboolexpr {\x == 0 && \y == 0} %for a velocity with velocity 0 
+            {} %do nothing
+            {\GenVar{27}{40}{100} %else: generate a new random number
+                \draw [-stealth,line width=0.15mm] (\RandomOne*\x,\RandomOne*\y) to (0.08*\x,0.08*\y);}    %plot an arrow with random length
+          }
     }
 }
 }
@@ -69,7 +69,7 @@ lattice/.pic = {
 \tikzset{
 atom/.pic = {
     \GenVar{2}{14}{10} %generate random number
-	\draw [-stealth,line width=0.15mm, color=lightgray] (0,0) to (0.5-\RandomOne,0.5-\RandomTwo); %draw velocity (offset for negative values)
+    \draw [-stealth,line width=0.15mm, color=lightgray] (0,0) to (0.5-\RandomOne,0.5-\RandomTwo); %draw velocity (offset for negative values)
     \fill[color=midgray] (0,0) circle [radius=3pt]; %draw atom
 }
 }
@@ -83,36 +83,25 @@ atom/.pic = {
 \begin{tikzpicture}[scale=0.75, transform shape] %scale the whole picture
     
     %MESOSCOPIC LEVEL
-    \newcount\countx %new counter for x
-    \countx=-2 %set x counter value
-    \newcount\county %new counter for y
-    \county=-2 %set y counter value
-    \loop{ %double loop structure
-    	\loop
-    	\xintifboolexpr {\countx = 0 && \county = 0} %apart from center cell
-    	{}
-    	{\path[midgray]  (\countx,\county) pic{lattice};} %insert lattice pattern
-    	\advance \county 1 %advance y counter
-    	\ifnum \county < 3 %check if y loop is over
-    	\repeat} %end of y loop
-    \advance \countx 1 %advance x counter
-    \ifnum \countx < 3 %check if x loop is over
-    \repeat %end of x loop
+    \foreach \countx in {-2,-1,0,1,2}{
+        \foreach \county in {-2,-1,0,1,2}{
+            \xintifboolexpr {\countx == 0 && \county == 0} %apart from center cell
+            {}
+            {\path[midgray]  (\countx,\county) pic{lattice};} %insert lattice pattern
+        }
+    }
     
     \path[black] (0,0) pic{lattice}; %center lattice pattern
     
     %draw mesoscopic cells
-    \countx=-3 %re-adjust counter
-    \loop{\draw[fill=none, draw=lightgray] (\countx/2,-2) -- (\countx/2,2);} %vertical lines
-    \advance \countx 2
-    \ifnum \countx < 4
-    \repeat
+    \foreach \countx in {-3,-1,1,3}{
+        \draw[fill=none, draw=lightgray] (\countx/2,-2) -- (\countx/2,2); %vertical lines
+    }
     
     \county=-3
-    \loop{\draw[fill=none, draw=lightgray] (-2,\county/2) -- (2,\county/2);} %horizontal lines
-    \advance \county 2
-    \ifnum \county < 4
-    \repeat
+    \foreach \county in {-3,-1,1,3}{
+        \draw[fill=none, draw=lightgray] (-2,\county/2) -- (2,\county/2); %horizontal lines
+    }
 
     \draw[fill=none, draw=darkgray] (-0.5,-0.5) rectangle (0.5,0.5); %draw center cell
     
@@ -133,19 +122,13 @@ atom/.pic = {
     
     
     %MACROSCOPIC LEVEL
-    \countx=-1 %re-adjust counters
-    \county=-1
-    \loop{
-    	\loop
-    	\xintifboolexpr {\countx = 0 && \county = 0} %apart from center cell
-    	{}
-    	{\node[draw=none,text=midgray] at (6+2*\countx, 2*\county) {$T, p, \vec v$};} %create label
-    	\advance \county 1
-    	\ifnum \county < 2
-    	\repeat}
-    \advance \countx 1
-    \ifnum \countx < 2
-    \repeat
+    \foreach \countx in {-1,0,1}{
+        \foreach \county in {-1,0,1}{
+            \xintifboolexpr {\countx == 0 && \county == 0} %apart from center cell
+            {}
+            {\node[draw=none,text=midgray] at (6+2*\countx, 2*\county) {$T, p, \vec v$};} %create label
+        }
+    }
     
     \node[draw=none,text=black] at (6, 0) {$T, p, \vec v$}; %create center cell label
     \draw[fill=none, draw=lightgray] (6-1,-2) -- (6-1,2); %draw vertical lines
