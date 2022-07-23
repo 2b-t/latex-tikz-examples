@@ -1,10 +1,10 @@
 {
-  "name": "Latex Examples Docker Compose",
+  "name": "Latex and Tikz examples Docker Compose",
   "dockerComposeFile": [
     "../docker/docker-compose.yml"
   ],
   "service": "latex_docker",
-	"workspaceFolder": "/code/latex",
+	"workspaceFolder": "/code",
   "shutdownAction": "stopCompose",
   "extensions": [
   ]

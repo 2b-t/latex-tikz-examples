@@ -4,9 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: latexmk
     tty: true
     volumes:
-      - ../.vscode:/code/latex/.vscode
-      - ../src:/code/latex/src
-      - ../Makefile:/code/latex/Makefile
+      - ../.vscode:/code/.vscode
+      - ../src:/code/src
+      - ../Makefile:/code/Makefile
 
