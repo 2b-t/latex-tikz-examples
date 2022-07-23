@@ -13,7 +13,7 @@ all:
 	@mkdir -p $(BUILDDIR)
 	@cd $(BUILDDIR)
 	@for i in $(SOURCES); do \
-		latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -output-directory="build" -use-make $$i; \
+		latexmk -quiet -pdf -pdflatex="pdflatex -interaction=nonstopmode" -output-directory="build" -use-make $$i; \
 	done
 
 %.tex: %.raw
