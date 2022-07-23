@@ -19,14 +19,14 @@ jobs:
       - name: Install Zip package
         run: apt-get install zip
       - name: Zip PDF files
-        run: find build -name '*.pdf' | zip Examples.zip -@
+        run: find build -name '*.pdf' | zip -j Examples.zip -@
       - name: Upload Zip file to repository release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Examples.zip
           asset_name: Examples.zip
-          tag: file
+          tag: latest
           overwrite: true
           body: "Auto-generated Latex Tikz PDF files"
 
