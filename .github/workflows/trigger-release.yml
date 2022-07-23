@@ -1,0 +1,19 @@
+name: Trigger release
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'Makefile'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger release workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: trigger-release
+

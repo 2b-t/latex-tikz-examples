@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  repository_dispatch:
+    types: [trigger-release]
+
+jobs:
+  docker-compose-build:
+    runs-on: ubuntu-latest
+    container:
+      image: tobitflatscher/latexmk
+      volumes:
+        - ${{ github.workspace }}:/code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Compile Latex files with Make
+        run: make all
+      - name: Install Zip package
+        run: apt-get install zip
+      - name: Zip PDF files
+        run: find build -name '*.pdf' | zip Examples.zip -@
+      - name: Upload Zip file to repository release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Examples.zip
+          asset_name: Examples.zip
+          tag: file
+          overwrite: true
+          body: "Auto-generated Latex Tikz PDF files"
+
