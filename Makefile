@@ -11,7 +11,6 @@ SOURCES = $(wildcard $(SRCDIR)/*.tex)
 
 all:
 	@mkdir -p $(BUILDDIR)
-	@cd $(BUILDDIR)
 	@for i in $(SOURCES); do \
 		latexmk -quiet -pdf -pdflatex="pdflatex -interaction=nonstopmode" -output-directory="build" -use-make $$i; \
 	done
