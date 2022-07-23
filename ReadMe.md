@@ -1,3 +1,5 @@
+[![Dockerhub](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml) [![Release](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml)
+
 # LaTeX and TikZ examples
 
 Author: [Tobit Flatscher](https://github.com/2b-t) (2018-2020)
