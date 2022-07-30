@@ -1,4 +1,4 @@
-[![Dockerhub](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml) [![Release](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml)
+[![Dockerhub](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml) [![Release](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # LaTeX and TikZ examples
 
