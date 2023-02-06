@@ -1,8 +1,10 @@
-[![Dockerhub](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml) [![Release](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 # LaTeX and TikZ examples
 
 Author: [Tobit Flatscher](https://github.com/2b-t) (2018-2020)
+
+[![Dockerhub](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/update-dockerhub.yml) [![Release](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml/badge.svg)](https://github.com/2b-t/latex-tikz-examples/actions/workflows/release.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 
 A couple of (animated) vector figures created with [LaTeX](https://www.latex-project.org/) and [TikZ](https://en.wikipedia.org/wiki/PGF/TikZ).
 
