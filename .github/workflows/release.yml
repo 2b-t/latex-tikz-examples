@@ -17,7 +17,9 @@ jobs:
       - name: Compile Latex files with Make
         run: make all
       - name: Install Zip package
-        run: apt-get install zip
+        run: |
+          apt-get update
+          apt-get install -y zip
       - name: Zip PDF files
         run: find build -name '*.pdf' | zip -j Examples.zip -@
       - name: Upload Zip file to repository release
@@ -26,7 +28,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Examples.zip
           asset_name: Examples.zip
-          tag: latest
+          tag: Examples
           overwrite: true
           body: "Auto-generated Latex Tikz PDF files"
 
