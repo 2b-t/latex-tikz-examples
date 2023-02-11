@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/**'
       - 'Makefile'
+  workflow_dispatch:
 
 jobs:
   release:
