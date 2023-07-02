@@ -4,7 +4,7 @@
     "../docker/docker-compose.yml"
   ],
   "service": "latex_docker",
-	"workspaceFolder": "/code",
+  "workspaceFolder": "/code",
   "shutdownAction": "stopCompose",
   "extensions": [
   ]
