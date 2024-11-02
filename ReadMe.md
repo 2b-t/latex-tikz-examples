@@ -17,6 +17,8 @@ Currently this repository contains the following examples:
 - The principle of the [**Fourier analysis**](https://en.wikipedia.org/wiki/Fourier_analysis) is illustrated in [yet another file](./build/FourierAnalysis.pdf).
 - [The last example](./build/StokesFormula.pdf) shows how the [**Stokes' law**](https://en.wikipedia.org/wiki/Stokes%27_law) [can be derived by means of integration of stresses](https://physics.stackexchange.com/a/537854/245414).
 
+For opening the animated figures on Linux I recommend using [Okular](https://okular.kde.org/) as many other common document viewers do not support it.
+
 ## Usage
 
 Clearly you can open the `*.tex` files located in [`src`](./src) in your favourite LaTeX editor such as TexStudio. Otherwise this repository also comes with a Makefile which will compile all the `*.tex` files located in the [`src`](./src) folder to the [`build`](./build) folder. This requires the [`latexmk` package](https://ctan.org/pkg/latexmk?lang=en), which can be installed on Ubuntu with `$ apt-get -y update latexmk`.
